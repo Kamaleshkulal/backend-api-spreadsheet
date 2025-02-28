@@ -9,21 +9,7 @@ load_dotenv()
 
 
 # Access environment variables
-GOOGLE_CREDS_PATH = os.getenv('GOOGLE_CREDS_PATH')
-GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
-GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
-
-# Ensure GOOGLE_REDIRECT_URIS is loaded correctly
-GOOGLE_REDIRECT_URIS = os.getenv('GOOGLE_REDIRECT_URIS')
-
-# Check if GOOGLE_REDIRECT_URIS is loaded and split the values correctly
-if GOOGLE_REDIRECT_URIS:
-    GOOGLE_REDIRECT_URIS = GOOGLE_REDIRECT_URIS.split(',')
-else:
-    raise ValueError("GOOGLE_REDIRECT_URIS environment variable is not set or is empty")
-
-# Ensure GOOGLE_JAVASCRIPT_ORIGINS is loaded correctly
-GOOGLE_JAVASCRIPT_ORIGINS = os.getenv('GOOGLE_JAVASCRIPT_ORIGINS').split(',')
+GOOGLE_CREDS_PATH = './api/config/credentials.json'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
