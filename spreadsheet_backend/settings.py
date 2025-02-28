@@ -6,6 +6,8 @@ from dotenv import load_dotenv
 # Load environment variables from the .env file
 load_dotenv()
 
+
+
 # Access environment variables
 GOOGLE_CREDS_PATH = os.getenv('GOOGLE_CREDS_PATH')
 GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
@@ -27,7 +29,7 @@ GOOGLE_JAVASCRIPT_ORIGINS = os.getenv('GOOGLE_JAVASCRIPT_ORIGINS').split(',')
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY="django-insecure-v-oe%ao*$0v7h5y))wco(akt4bdjq-a)dsw8#kocc60k1!6^s*"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -86,7 +88,7 @@ TEMPLATES = [
 WSGI_APPLICATION = "spreadsheet_backend.wsgi.application"
 
 # Fetch the DATABASE_URL from environment variables (it should be set in your environment)
-database_url = os.getenv('DATABASE_URL')
+database_url = 'postgresql://kamaleshdb_owner:npg_brpjJ9Gf6Wdz@ep-snowy-cake-a5ga0y37-pooler.us-east-2.aws.neon.tech/kamaleshdb'
 
 if database_url:
     # Parse the DATABASE_URL
