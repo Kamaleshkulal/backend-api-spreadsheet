@@ -1,12 +1,8 @@
 import os
 from pathlib import Path
 from urllib.parse import urlparse
-from dotenv import load_dotenv
 
 # Load environment variables from the .env file
-load_dotenv()
-
-
 
 # Access environment variables
 GOOGLE_CREDS_PATH = './api/config/credentials.json'
