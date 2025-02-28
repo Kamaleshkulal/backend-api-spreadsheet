@@ -13,8 +13,20 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from urllib.parse import urlparse
-
+from dotenv import load_dotenv
+from urllib.parse import urlparse
 from pathlib import Path
+
+# Load environment variables from the .env file
+load_dotenv()
+
+# Access environment variables
+GOOGLE_CREDS_PATH = os.getenv('GOOGLE_CREDS_PATH')
+GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
+GOOGLE_CLIENT_SECRET = os.getenv('GOOGLE_CLIENT_SECRET')
+GOOGLE_REDIRECT_URIS = os.getenv('GOOGLE_REDIRECT_URIS').split(',')
+GOOGLE_JAVASCRIPT_ORIGINS = os.getenv('GOOGLE_JAVASCRIPT_ORIGINS').split(',')
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,8 +35,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-v-oe%ao*$0v7h5y))wco(akt4bdjq-a)dsw8#kocc60k1!6^s*"
+SECRET_KEY = os.getenv("SECRET_KEY")
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -86,27 +98,27 @@ WSGI_APPLICATION = "spreadsheet_backend.wsgi.application"
 
 
 
-
 # Fetch the DATABASE_URL from environment variables (it should be set in your environment)
-database_url = "DATABASE_URL='postgresql://kamaleshdb_owner:npg_brpjJ9Gf6Wdz@ep-snowy-cake-a5ga0y37-pooler.us-east-2.aws.neon.tech/kamaleshdb?sslmode=require'"
+database_url = os.getenv('DATABASE_URL')
 
 if database_url:
     # Parse the DATABASE_URL
     url = urlparse(database_url)
-    
+
     # Update the DATABASES configuration
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': url.path[1:],
+            'NAME': url.path[1:],  # Extract database name (remove leading slash)
             'USER': url.username,
             'PASSWORD': url.password,
             'HOST': url.hostname,
-            'PORT': url.port or 5432, 
+            'PORT': url.port or 5432,  # Default PostgreSQL port
         }
     }
 else:
     raise ValueError("DATABASE_URL environment variable is not set")
+
 
 
 # Password validation

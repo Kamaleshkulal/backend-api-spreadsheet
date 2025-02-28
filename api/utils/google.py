@@ -4,12 +4,14 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from googleapiclient.errors import HttpError
+from dotenv import load_dotenv
 
-# If modifying a sheet is required, the SCOPES variable should include:
+# Load environment variables from the .env file
+load_dotenv()
+
+# Access environment variables
+GOOGLE_CREDS_PATH = os.getenv('GOOGLE_CREDS_PATH')  # Load credentials path from .env
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
-
-# Set the path to your credentials file using an environment variable
-CREDS_PATH = os.getenv('GOOGLE_CREDS_PATH', './config/credentials.json')  # Default if not found
 
 def get_credentials():
     """Shows the authentication flow and gets the credentials."""
@@ -25,8 +27,8 @@ def get_credentials():
         else:
             # OAuth flow for getting the credentials
             flow = InstalledAppFlow.from_client_secrets_file(
-                CREDS_PATH, SCOPES)
-            creds = flow.run_local_server(port=0)  # Removed redirect_uri here, it will be auto handled
+                GOOGLE_CREDS_PATH, SCOPES)
+            creds = flow.run_local_server(port=0)  # Automatically handles redirect_uri
         # Save the credentials for the next run
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
