@@ -4,13 +4,8 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 from googleapiclient.errors import HttpError
-from dotenv import load_dotenv
-
-# Load environment variables from the .env file
-load_dotenv()
-
 # Access environment variables
-GOOGLE_CREDS_PATH = os.getenv('GOOGLE_CREDS_PATH')  # Load credentials path from .env
+GOOGLE_CREDS_PATH = './api/config/credentials.json' # Load credentials path from .env
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 def get_credentials():
